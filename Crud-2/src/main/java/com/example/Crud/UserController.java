@@ -6,24 +6,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/*")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping("users")
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
-    @PostMapping("/users")
+    @PostMapping("users")
     public User create(@RequestBody User user) {
         return userRepository.save(user);
     }
 
 
-    @PutMapping("/users/{id}")
+    @PutMapping("users/{id}")
     public User update(@PathVariable("id") Long id, @RequestBody User userObject)
     {
         User user = userRepository.findById(id).get();
@@ -34,7 +34,7 @@ public class UserController {
 
 
 
-   @DeleteMapping("/users/{id}")
+   @DeleteMapping("users/{id}")
     public List<User> delete(@PathVariable("id") Long id)
     {
         userRepository.deleteById(id);
